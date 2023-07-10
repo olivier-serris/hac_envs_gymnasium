@@ -115,3 +115,6 @@ class GymWrapper(GoalEnv):
         if self.viewer is None:
             self.viewer = MjViewer(self.hac_env.sim)
         self.viewer.render()
+
+    def compute_terminated(self, achieved_goal, desired_goal, info):
+        return self.compute_reward(achieved_goal, desired_goal, info) == 0
