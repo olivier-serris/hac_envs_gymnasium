@@ -68,12 +68,12 @@ class GymWrapper(GoalEnv):
 
     def compute_reward(self, achieved_goal, desired_goal, info):
         tolerance = self.hac_env.end_goal_thresholds
-        reward = 0.0
-        for a_goal, d_goal, tol in zip(achieved_goal, desired_goal, tolerance):
-            if np.absolute(a_goal - d_goal) > tol:
-                reward = -1.0
-                break
-        return reward
+        achieved_goal = achieved_goal
+        desired_goal = desired_goal
+        abs_dist = np.abs((desired_goal - achieved_goal))
+        goal_reached = (abs_dist <= tolerance).all(axis=-1)
+        reward = goal_reached - 1
+        return reward.flatten()
 
     def step(self, action):
         state = self.hac_env.execute_action(action)
