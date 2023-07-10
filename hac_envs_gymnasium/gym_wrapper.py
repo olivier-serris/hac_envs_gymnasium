@@ -85,10 +85,13 @@ class GymWrapper(GoalEnv):
         truncated = np.logical_and(
             np.logical_not(terminated), self.n_steps >= self.max_episode_steps
         )
+        info["is_success"] = terminated
 
         return obs, reward, terminated, truncated, info
 
     def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None):
+        if seed:
+            np.random.seed(seed)
         self.desired_goal = self.hac_env.get_next_goal(test=False)
         spec = getargspec(self.hac_env.reset_sim)
         if "next_goal" in spec.args:
