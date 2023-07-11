@@ -1,6 +1,6 @@
 from gymnasium import spaces
 from gymnasium_robotics import GoalEnv
-from inspect import getargspec
+from inspect import getfullargspec
 from mujoco_py import MjViewer
 import numpy as np
 from typing import Optional
