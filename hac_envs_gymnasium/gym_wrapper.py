@@ -93,7 +93,7 @@ class GymWrapper(GoalEnv):
         if seed:
             np.random.seed(seed)
         self.desired_goal = self.hac_env.get_next_goal(test=False)
-        spec = getargspec(self.hac_env.reset_sim)
+        spec = getfullargspec(self.hac_env.reset_sim)
         if "next_goal" in spec.args:
             state = self.hac_env.reset_sim(self.desired_goal)
         else:
