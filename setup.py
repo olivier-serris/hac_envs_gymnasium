@@ -8,7 +8,7 @@ setup(
         "numpy",
         "gymnasium",
         "mujoco-py==2.1.2.14",
-        "gymnasium-robotics[mujoco-py]",
+        "gymnasium-robotics",
     ],
     include_package_data=True,
 )
